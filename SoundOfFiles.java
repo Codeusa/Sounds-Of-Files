@@ -17,7 +17,7 @@ public class SoundOfFiles {
 			if (fileEntry.isDirectory()) {
 				getFileBytes(fileEntry);
 			} else {
-				System.out.println(fileEntry.getName());
+				shout(fileEntry.getName());
 				playSound((int) fileSizeInBytes / 100); // saving your ears from
 														// death by / 100
 			}
@@ -32,8 +32,7 @@ public class SoundOfFiles {
 			path = args[0];
 		} else {
 			final Scanner scanner = new Scanner(System.in);
-			System.out
-					.print("Enter the path to which you want to make sound (example C:/Files/):");
+			shout("Enter the path to which you want to make sound (example C:/Files/):");
 			path = scanner.next(); // Get what the user types.
 			scanner.close();
 		}
@@ -55,7 +54,7 @@ public class SoundOfFiles {
 		sourceDataLine.start();
 		for (int i = 0; i < 1000 * (float) 44100 / 1000; i++) {
 			final double angle = i / ((float) 44100 / filesize) * 2.0 * Math.PI;
-			buffer[0] = (byte) (Math.sin(angle) * 128); //mathmathmath
+			buffer[0] = (byte) (Math.sin(angle) * 128); // mathmathmath
 			sourceDataLine.write(buffer, 0, 1);
 
 		}
@@ -63,6 +62,10 @@ public class SoundOfFiles {
 		sourceDataLine.drain();
 		sourceDataLine.stop();
 		sourceDataLine.close();
+	}
+
+	private static void shout(final String message) {
+		System.out.println(message);
 	}
 
 }
