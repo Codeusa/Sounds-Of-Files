@@ -12,15 +12,20 @@ public class SoundOfFiles {
 
 	public static void getFileBytes(final File folder)
 			throws LineUnavailableException {
-		for (final File fileEntry : folder.listFiles()) {
-			final long fileSizeInBytes = fileEntry.length();
-			if (fileEntry.isDirectory()) {
-				getFileBytes(fileEntry);
-			} else {
-				shout(fileEntry.getName());
-				playSound((int) fileSizeInBytes / 100); // saving your ears from
-														// death by / 100
+		try {
+			for (final File fileEntry : folder.listFiles()) {
+				final long fileSizeInBytes = fileEntry.length();
+				if (fileEntry.isDirectory()) {
+					getFileBytes(fileEntry);
+				} else {
+					shout(fileEntry.getName());
+					playSound((int) fileSizeInBytes / 100); // saving your ears
+															// from
+															// death by / 100
+				}
 			}
+		} catch (final Exception e) {
+			shout("Invalid path entered"); // error handling at its finest.
 		}
 
 	}
