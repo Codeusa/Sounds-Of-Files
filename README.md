@@ -11,7 +11,7 @@ You'll be prompted to enter a path to whatever folder you wish to make sound of 
 ```
 C:\Users\Andrew\Desktop\
 ```
-Addionally it supports command line arguments so you could simple do 
+Addionally it supports command line arguments so you could simpley do 
 
 ```
 java -jar SoundsOfFiles.jar C:\Users\Andrew\Desktop\
