@@ -1,0 +1,30 @@
+<project>
+
+	<target
+		name="compile"
+		description="Compile source code." >
+		<mkdir
+			dir="SoundOfFiles" />
+		<javac
+			includeantruntime="false"
+			srcdir="sounds"
+			destdir="SoundOfFiles"
+			debug="on" />
+	</target>
+
+	<target
+		name="createjar"
+		depends="compile"
+		description="Create jar.">
+		<jar
+			destfile="SoundOfFiles.jar"
+			basedir="SoundOfFiles" >
+			<manifest>
+				<attribute
+					name="Main-Class"
+					value="sounds.SoundOfFiles" />
+			</manifest>
+		</jar>
+	</target>
+
+</project>
