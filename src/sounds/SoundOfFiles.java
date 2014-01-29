@@ -47,9 +47,9 @@ public class SoundOfFiles {
 			if (fileEntry.isDirectory()) {
 				playFile(fileEntry);
 			} else {
-				logger.info("Playing File: "
-						+ String.valueOf(fileEntry.getName()));
 				final long fileSizeInBytes = fileEntry.length();
+				logger.info("Playing File: "
+						+ String.valueOf(fileEntry.getName()) + " " + fileSizeInBytes);
 				playSound(fileSizeInBytes);
 			}
 		}
