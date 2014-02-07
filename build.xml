@@ -1,6 +1,6 @@
 <project name="SoundOfFiles" >
 
-	<property name="src.dir"  value="src" />
+	<property name="src.dir"  value="src/main/java" />
 	<property name="classes.dir"  value="classes" />
 	<property name="main-class"  value="sounds.SoundOfFiles" />
 	
