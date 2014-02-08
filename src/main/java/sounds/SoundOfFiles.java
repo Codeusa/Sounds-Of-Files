@@ -10,6 +10,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 
 public class SoundOfFiles {
+
 	private final static int CHANNELS = 1;
 	private final static boolean IS_BIG_ENDIAN = true;
 	private final static boolean IS_SIGNED = true;
@@ -18,29 +19,52 @@ public class SoundOfFiles {
 	private final static float SAMPLE_RATE = 44100.0f;
 	private final static int SAMPLE_SIZE = 8;
 
+	/**
+	 * The main method.
+	 */
 	public static void main(final String[] args) {
-
 		final String path;
+		final File folder;
+
 		if (args.length > 0) {
 			path = args[0];
 		} else {
-			final Scanner scanner = new Scanner(System.in);
-			logger.info("Enter the path to which you want to make sound (example C:/Files/Project/):");
-			path = scanner.next(); // Get what the user types.
-			scanner.close();
+			path = getPath();
 		}
 
-		try {
-			final File folder = new File(path);
-			playFile(folder);
-		} catch (final LineUnavailableException e) {
-			logger.severe("Encounter error: " + e.getClass());
-			logger.severe("Error message: " + e.getMessage());
-			logger.severe("Error cause: " + e.getCause());
+		folder = new File(path);
+
+		if (folder.exists()) {
+			try {
+				playFile(folder);
+			} catch (final LineUnavailableException e) {
+				logger.severe("Encounter error: " + e.getClass());
+				logger.severe("Error message: " + e.getMessage());
+				logger.severe("Error cause: " + e.getCause());
+			}
+		} else {
+			logger.info("Invalid path.");
 		}
 
 	}
 
+	/**
+	 * Get path.
+	 */
+	public static String getPath() {
+		final String input;
+		final Scanner scanner = new Scanner(System.in);
+
+		logger.info("Enter the path to which you want to make sound (example C:/Files/Project/):");
+		input = scanner.next();
+		scanner.close();
+
+		return input;
+	}
+
+	/**
+	 * Loop through the files.
+	 */
 	public static void playFile(final File folder)
 			throws LineUnavailableException {
 		for (final File fileEntry : folder.listFiles()) {
@@ -56,6 +80,9 @@ public class SoundOfFiles {
 
 	}
 
+	/**
+	 * Play a sound according to the file size.
+	 */
 	private static void playSound(final long filesize)
 			throws LineUnavailableException {
 		final byte[] buffer = new byte[1];
