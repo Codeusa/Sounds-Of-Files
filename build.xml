@@ -2,6 +2,7 @@
 
 	<property name="src.dir"  value="src/main/java" />
 	<property name="classes.dir"  value="classes" />
+	<property name="jar"  value="${ant.project.name}.jar" />
 	<property name="main-class"  value="sounds.SoundOfFiles" />
 	
 	<target
@@ -21,7 +22,7 @@
 		depends="compile"
 		description="Create jar." >
 		<jar
-			destfile="${ant.project.name}.jar"
+			destfile="${jar}"
 			basedir="${classes.dir}" >
 			<manifest>
 				<attribute
@@ -29,6 +30,15 @@
 					value="${main-class}" />
 			</manifest>
 		</jar>
+	</target>
+
+	<target
+		name="run"
+		depends="jar"
+		description="Run the program." >
+		<java
+			fork="true"
+			jar="${jar}" />
 	</target>
 	
 	<target
